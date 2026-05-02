@@ -34,7 +34,7 @@ export default function Intelligence({ containers }) {
       {/* Fleet financial summary */}
       <div>
         <div className="section-label">FLEET FINANCIAL INTELLIGENCE</div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(5,1fr)', gap:14 }}>
+        <div className="intel-metrics-grid">
           {[
             { l:'Total Cargo Value', v:`$${(totalValue/1000000).toFixed(1)}M`, c:'var(--cyan)', icon:'💰' },
             { l:'Estimated Loss Exposure', v:`$${(totalLoss/1000000).toFixed(2)}M`, c:totalLoss>500000?'var(--red)':'var(--amber)', icon:'💸' },
@@ -161,6 +161,7 @@ export default function Intelligence({ containers }) {
       <div>
         <div className="section-label">CARGO TYPE RISK MATRIX</div>
         <div className="card">
+          <div className="table-scroll">
           <table className="data-table">
             <thead>
               <tr>
@@ -191,6 +192,7 @@ export default function Intelligence({ containers }) {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </div>

@@ -78,7 +78,7 @@ export default function Dashboard({ containers: containersProp, setContainers: s
   return (
     <div>
       {/* Metrics */}
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(6,1fr)', gap:12, marginBottom:24 }}>
+      <div className="metrics-grid">
         {[
           { l:'TOTAL', v:containers.length, c:'var(--cyan)' },
           { l:'CRITICAL', v:critical, c:'var(--red)' },
@@ -100,6 +100,7 @@ export default function Dashboard({ containers: containersProp, setContainers: s
           display:'flex', alignItems:'center', gap:12, padding:'12px 20px',
           background:'rgba(255,23,68,0.06)', border:'1px solid rgba(255,23,68,0.2)',
           borderRadius:'var(--r-md)', marginBottom:20,
+          flexWrap:'wrap',
         }}>
           <span style={{ color:'var(--red)', fontSize:18 }}>⚠</span>
           <span style={{ fontSize:13, color:'var(--text)' }}>
@@ -113,7 +114,7 @@ export default function Dashboard({ containers: containersProp, setContainers: s
       )}
 
       {/* Toolbar */}
-      <div style={{ display:'flex', gap:8, marginBottom:20, flexWrap:'wrap' }}>
+      <div style={{ display:'flex', gap:8, marginBottom:20, flexWrap:'wrap', alignItems:'center' }}>
         {[{v:'ALL',l:'All',n:containers.length},{v:'CRITICAL',l:'Critical',n:critical},{v:'WARNING',l:'Warning',n:warning},{v:'OK',l:'Nominal',n:ok}].map(f => (
           <button key={f.v} onClick={() => setFilter(f.v)} style={{
             padding:'7px 16px',
@@ -128,20 +129,20 @@ export default function Dashboard({ containers: containersProp, setContainers: s
             <span style={{ background:'var(--navy3)', padding:'1px 7px', borderRadius:10, fontSize:11, fontFamily:'var(--font-mono)' }}>{f.n}</span>
           </button>
         ))}
-        <button className="btn btn-primary" onClick={() => setShowModal(true)} style={{ marginLeft:'auto', padding:'7px 18px', fontSize:13 }}>
+        <button className="btn btn-primary dashboard-add-btn" onClick={() => setShowModal(true)} style={{ marginLeft:'auto', padding:'7px 18px', fontSize:13 }}>
           + Add Shipment
         </button>
       </div>
 
       {/* Grid + detail */}
-      <div style={{ display:'grid', gridTemplateColumns: selected ? '1fr 500px' : '1fr', gap:20, alignItems:'start' }}>
-        <div style={{ display:'grid', gridTemplateColumns: selected ? '1fr 1fr' : 'repeat(3,1fr)', gap:14 }} className={!selected?'grid-3':''}>
+      <div className="dashboard-split">
+        <div className={`dashboard-cards-grid${selected ? ' compact' : ''}`}>
           {filtered.map(c => (
             <ContainerCard key={c.id} container={c} onClick={c => setSelected(c.id===selected?.id ? null : c)} selected={c.id===selected?.id}/>
           ))}
         </div>
         {selected && (
-          <div style={{ position:'sticky', top:80 }}>
+          <div className="detail-sticky-wrap">
             <DetailPanel container={selected} onClose={() => setSelected(null)}/>
           </div>
         )}
@@ -162,7 +163,7 @@ export default function Dashboard({ containers: containersProp, setContainers: s
               <button className="btn btn-ghost" onClick={() => setShowModal(false)} style={{ padding:'5px 12px' }}>✕</button>
             </div>
 
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:14 }}>
+            <div className="modal-form-grid">
               <div>
                 <label style={{ fontSize:11, color:'var(--text3)', display:'block', marginBottom:5, fontFamily:'var(--font-mono)', letterSpacing:'1px' }}>CONTAINER ID *</label>
                 <input {...inp('id')} placeholder="e.g. MAEU1234567" style={{ background:'var(--navy3)', border:'1px solid var(--border)', borderRadius:'var(--r-md)', padding:'10px 14px', color:'var(--text)', fontSize:13, width:'100%', outline:'none', fontFamily:'var(--font-mono)' }}/>

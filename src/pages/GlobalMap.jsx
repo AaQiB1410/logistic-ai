@@ -48,14 +48,14 @@ export default function GlobalMap({ containers, onSelect }) {
 
   return (
     <div>
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20 }}>
+      <div className="map-page-head">
         <div>
           <div style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:18 }}>Live Fleet Positions</div>
           <div style={{ fontSize:12, color:'var(--text2)', marginTop:3 }}>
             {containers.length} containers tracked globally · Click a dot to view details
           </div>
         </div>
-        <div style={{ display:'flex', gap:16, fontSize:12 }}>
+        <div style={{ display:'flex', gap:16, fontSize:12, flexWrap:'wrap', alignItems:'center' }}>
           {[{c:'var(--red)',l:'Critical'},{c:'var(--amber)',l:'Warning'},{c:'var(--green)',l:'Nominal'}].map(i=>(
             <div key={i.l} style={{ display:'flex', alignItems:'center', gap:6 }}>
               <div style={{ width:10, height:10, borderRadius:'50%', background:i.c, boxShadow:`0 0 8px ${i.c}` }}/>
@@ -167,7 +167,7 @@ export default function GlobalMap({ containers, onSelect }) {
       </div>
 
       {/* Container summary cards below map */}
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(6,1fr)', gap:12, marginTop:20 }} className="grid-3">
+      <div className="map-summary-cards">
         {containers.map(c => {
           const color = c.status==='CRITICAL'?'var(--red)':c.status==='WARNING'?'var(--amber)':'var(--green)'
           return (

@@ -13,7 +13,7 @@ export default function Navbar({ tab, setTab, criticalCount, onHome }) {
   return (
     <nav className="nav">
       {/* Logo */}
-      <div onClick={onHome} style={{ display:'flex', alignItems:'center', gap:10, cursor:'pointer', flexShrink:0 }}>
+      <div className="nav-brand" onClick={onHome} style={{ display:'flex', alignItems:'center', gap:10, cursor:'pointer' }}>
         <div style={{
           width:36, height:36,
           background:'var(--grad-brand)',
@@ -31,19 +31,16 @@ export default function Navbar({ tab, setTab, criticalCount, onHome }) {
         </div>
       </div>
 
-      {/* Nav tabs */}
-      <div style={{ display:'flex', gap:2, marginLeft:12 }}>
+      {/* Nav tabs — horizontal scroll on narrow viewports */}
+      <div className="nav-tabs-scroll" aria-label="Primary navigation">
         {TABS.map(t => (
-          <button key={t.id} onClick={() => setTab(t.id)} style={{
-            padding:'6px 14px',
-            background: tab===t.id ? 'rgba(0,229,255,0.1)' : 'transparent',
-            border: tab===t.id ? '1px solid rgba(0,229,255,0.2)' : '1px solid transparent',
-            borderRadius:'var(--r-sm)',
-            color: tab===t.id ? 'var(--cyan)' : 'var(--text2)',
-            fontFamily:'var(--font-display)', fontWeight:500, fontSize:13,
-            cursor:'pointer', transition:'all 0.2s',
-            position:'relative',
-          }}>
+          <button
+            key={t.id}
+            type="button"
+            className="nav-tab-btn"
+            data-active={tab === t.id}
+            onClick={() => setTab(t.id)}
+          >
             {t.label}
             {t.id==='alerts' && criticalCount>0 && (
               <span style={{
@@ -59,8 +56,8 @@ export default function Navbar({ tab, setTab, criticalCount, onHome }) {
       </div>
 
       {/* Right */}
-      <div style={{ marginLeft:'auto', display:'flex', alignItems:'center', gap:14 }}>
-        <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'var(--text3)' }}>
+      <div className="nav-meta">
+        <div className="nav-meta-time">
           {new Date().toUTCString().slice(17,25)} UTC
         </div>
         {criticalCount>0 && (

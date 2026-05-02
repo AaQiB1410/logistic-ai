@@ -12,11 +12,12 @@ export default function Alerts() {
   }
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 420px', gap: 24, alignItems: 'start' }}>
+    <div className="alerts-split">
       {/* Left: Alerts feed */}
       <div>
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20,
+          flexWrap: 'wrap', gap: 12,
         }}>
           <h2 style={{
             fontFamily: 'var(--font-display)',
@@ -59,7 +60,7 @@ export default function Alerts() {
                   borderTop: '1px solid transparent',
                   borderRight: `1px solid rgba(${bgAlpha}, ${isSelected ? '0.3' : '0.12'})`,
                   borderBottom: `1px solid rgba(${bgAlpha}, ${isSelected ? '0.3' : '0.12'})`,
-                  borderRadius: '0 var(--radius-md) var(--radius-md) 0',
+                  borderRadius: '0 var(--r-md) var(--r-md) 0',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
                 }}

@@ -32,7 +32,7 @@ export default function App() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100%', flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
       <Navbar
         tab={tab}
         setTab={setTab}
@@ -41,31 +41,16 @@ export default function App() {
       />
 
       {/* Page heading */}
-      <div style={{
-        background: 'var(--navy2)',
-        borderBottom: '1px solid var(--border)',
-        padding: '14px 32px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 10,
-      }}>
-        <h1 style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 16, fontWeight: 700,
-          color: 'var(--text)',
-        }}>
-          {PAGE_TITLES[tab]}
-        </h1>
-        <div style={{
-          marginLeft: 'auto',
-          fontFamily: 'var(--font-mono)',
-          fontSize: 11, color: 'var(--text3)',
-        }}>
-          Last updated: {new Date().toLocaleString('en-US', {
+      <header className="app-page-header">
+        <h1>{PAGE_TITLES[tab]}</h1>
+        <div className="app-page-header-meta">
+          Last updated:{' '}
+          {new Date().toLocaleString('en-US', {
             month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
-          })} UTC
+          })}{' '}
+          UTC
         </div>
-      </div>
+      </header>
 
       <main className="main-content">
         {tab === 'dashboard' && (
@@ -98,19 +83,7 @@ export default function App() {
         )}
       </main>
 
-      <footer style={{
-        marginTop: 'auto',
-        padding: '20px 32px',
-        borderTop: '1px solid var(--border2)',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: 8,
-        fontSize: 11,
-        color: 'var(--text3)',
-        fontFamily: 'var(--font-mono)',
-      }}>
+      <footer className="app-footer-bar">
         <span>LogisticAI Risk Intelligence Platform</span>
         <span>© 2025 · Hackathon MVP v1.0.0</span>
         <span style={{ color: 'var(--green)' }}>● SYSTEM ONLINE</span>

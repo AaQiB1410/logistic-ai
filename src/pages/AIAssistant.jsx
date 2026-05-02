@@ -81,9 +81,9 @@ export default function AIAssistant() {
   }
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 24, alignItems: 'start' }}>
+    <div className="ai-split">
       {/* Chat */}
-      <div className="card" style={{ display: 'flex', flexDirection: 'column', height: '80vh' }}>
+      <div className="card ai-chat-panel">
         {/* Header */}
         <div style={{
           display: 'flex', alignItems: 'center', gap: 12,
@@ -218,7 +218,7 @@ export default function AIAssistant() {
         </div>
 
         {/* Input */}
-        <div style={{ display: 'flex', gap: 10 }}>
+        <div className="ai-chat-input-row">
           <textarea
             value={input}
             onChange={e => setInput(e.target.value)}
@@ -243,7 +243,7 @@ export default function AIAssistant() {
               cursor: loading || !input.trim() ? 'not-allowed' : 'pointer',
               flexShrink: 0,
               alignSelf: 'stretch',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: 'var(--r-md)',
             }}
           >
             →
@@ -269,7 +269,7 @@ export default function AIAssistant() {
               style={{
                 padding: '12px 14px',
                 background: c === selectedContainer ? 'var(--navy4)' : 'var(--navy3)',
-                borderRadius: 'var(--radius-md)',
+                borderRadius: 'var(--r-md)',
                 marginBottom: 10,
                 cursor: 'pointer',
                 border: `1px solid ${c.status === 'CRITICAL' ? 'rgba(255,23,68,0.25)' : 'rgba(255,171,0,0.2)'}`,

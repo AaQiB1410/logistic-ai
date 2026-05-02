@@ -51,7 +51,7 @@ export default function DetailPanel({ container: c, onClose }) {
       </div>
 
       {/* KPI row */}
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:10, marginBottom:20 }}>
+      <div className="detail-kpi-grid">
         {[
           { l:'RISK SCORE', v:c.riskScore, c:c.riskScore>=75?'var(--red)':c.riskScore>=45?'var(--amber)':'var(--green)' },
           { l:'TEMPERATURE', v:`${c.temp.toFixed(1)}°C`, c:c.temp>=c.tempRange[0]&&c.temp<=c.tempRange[1]?'var(--cyan)':'var(--red)' },
@@ -96,7 +96,7 @@ export default function DetailPanel({ container: c, onClose }) {
 
       {/* ── TREND CHARTS ── */}
       <SectionHead icon="📈" label="TREND ANALYSIS — LAST 9 READINGS"/>
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:14, marginBottom:20 }}>
+      <div className="detail-chart-row">
         <div style={{ background:'var(--navy3)', borderRadius:'var(--r-md)', padding:14 }}>
           <div style={{ fontSize:11, color:'var(--text2)', marginBottom:8, fontFamily:'var(--font-display)', fontWeight:600 }}>Temperature Trend</div>
           <MiniChart data={c.tempHistory} color={c.status==='CRITICAL'?'var(--red)':'var(--cyan)'} label="temp"/>
@@ -109,7 +109,7 @@ export default function DetailPanel({ container: c, onClose }) {
 
       {/* ── BUSINESS IMPACT ── */}
       <SectionHead icon="💼" label="BUSINESS IMPACT ASSESSMENT"/>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:10, marginBottom:20 }}>
+      <div className="detail-kpi-grid">
         {[
           { l:'Financial Loss', v:fmt(c.financialLoss), c:c.financialLoss>0?'var(--red)':'var(--green)', icon:'💸' },
           { l:'Spoilage Risk', v:`${c.spoilagePct}%`, c:c.spoilagePct>=30?'var(--red)':c.spoilagePct>=10?'var(--amber)':'var(--green)', icon:'⚗️' },
@@ -127,7 +127,7 @@ export default function DetailPanel({ container: c, onClose }) {
       {/* ── SCENARIO SIMULATION ── */}
       <SectionHead icon="🔬" label="SCENARIO SIMULATION"/>
       <div style={{ background:'rgba(124,58,255,0.04)', border:'1px solid rgba(124,58,255,0.18)', borderRadius:'var(--r-md)', padding:18, marginBottom:20 }}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginBottom:16 }}>
+        <div className="detail-sim-controls">
           <div>
             <div style={{ fontSize:12, color:'var(--text2)', marginBottom:8, fontFamily:'var(--font-display)', fontWeight:600 }}>
               🌡️ Temperature Shift: <span style={{ color:'var(--cyan)', fontFamily:'var(--font-mono)' }}>
@@ -173,7 +173,7 @@ export default function DetailPanel({ container: c, onClose }) {
         </button>
 
         {sim && (
-          <div className="animate-fade-in" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:10 }}>
+          <div className="animate-fade-in detail-kpi-grid detail-kpi-grid--tight">
             {[
               { l:'New Risk Score', v:sim.newRisk, c:sim.newRisk>=75?'var(--red)':sim.newRisk>=45?'var(--amber)':'var(--green)', delta:`was ${c.riskScore}` },
               { l:'Spoilage Prob.', v:`${sim.newSpoilage}%`, c:sim.newSpoilage>=30?'var(--red)':'var(--amber)', delta:`was ${c.spoilagePct}%` },

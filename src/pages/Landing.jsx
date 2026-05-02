@@ -52,7 +52,7 @@ export default function Landing({ onEnter }) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '80px 32px',
+          padding: 'clamp(48px, 12vw, 80px) clamp(16px, 4vw, 32px)',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -139,13 +139,8 @@ export default function Landing({ onEnter }) {
 
           {/* Stats */}
           <div
-            className="animate-fade-up"
+            className="animate-fade-up landing-stats-grid"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: 16,
-              maxWidth: 720,
-              margin: '0 auto',
               animationDelay: '0.5s',
             }}
           >
@@ -168,7 +163,7 @@ export default function Landing({ onEnter }) {
       </section>
 
       {/* ── FEATURES ── */}
-      <section style={{ padding: '100px 32px', maxWidth: 1200, margin: '0 auto' }}>
+      <section style={{ padding: 'clamp(48px, 10vw, 100px) clamp(16px, 4vw, 32px)', maxWidth: 1200, margin: '0 auto', width: '100%' }}>
         <div style={{ textAlign: 'center', marginBottom: 64 }}>
           <div className="section-label">PLATFORM CAPABILITIES</div>
           <h2 style={{
@@ -221,7 +216,7 @@ export default function Landing({ onEnter }) {
 
       {/* ── CTA ── */}
       <section style={{
-        padding: '100px 32px',
+        padding: 'clamp(48px, 10vw, 100px) clamp(16px, 4vw, 32px)',
         background: 'var(--navy2)',
         borderTop: '1px solid var(--border)',
         borderBottom: '1px solid var(--border)',
@@ -246,7 +241,7 @@ export default function Landing({ onEnter }) {
 
       {/* ── FOOTER ── */}
       <footer style={{
-        padding: '40px 32px',
+        padding: 'clamp(24px, 5vw, 40px) clamp(16px, 4vw, 32px)',
         borderTop: '1px solid var(--border2)',
         display: 'flex',
         justifyContent: 'space-between',
